@@ -1,0 +1,162 @@
+[
+  {
+    "name": "iPhone 15 Pro",
+    "category": "Electronics",
+    "qty": 25,
+    "price": 999.99,
+    "description": "Latest iPhone with titanium design and A17 Pro chip",
+    "tags": ["smartphone", "apple", "premium", "titanium"]
+  },
+  {
+    "name": "Samsung Galaxy S24",
+    "category": "Electronics", 
+    "qty": 30,
+    "price": 899.99,
+    "description": "Flagship Android phone with AI features",
+    "tags": ["smartphone", "samsung", "android", "AI"]
+  },
+  {
+    "name": "MacBook Air M3",
+    "category": "Electronics",
+    "qty": 15,
+    "price": 1299.99,
+    "description": "Ultra-thin laptop with M3 chip and 18-hour battery",
+    "tags": ["laptop", "apple", "M3", "ultrabook"]
+  },
+  {
+    "name": "Nike Air Max 270",
+    "category": "Footwear",
+    "qty": 50,
+    "price": 150.00,
+    "description": "Comfortable running shoes with Max Air cushioning",
+    "tags": ["shoes", "nike", "running", "air-max"]
+  },
+  {
+    "name": "Adidas Ultraboost 22",
+    "category": "Footwear",
+    "qty": 40,
+    "price": 180.00,
+    "description": "Premium running shoes with Boost technology",
+    "tags": ["shoes", "adidas", "running", "boost"]
+  },
+  {
+    "name": "The Great Gatsby",
+    "category": "Books",
+    "qty": 100,
+    "price": 12.99,
+    "description": "Classic American novel by F. Scott Fitzgerald",
+    "tags": ["book", "classic", "fiction", "american-literature"]
+  },
+  {
+    "name": "Atomic Habits",
+    "category": "Books",
+    "qty": 75,
+    "price": 16.99,
+    "description": "A proven framework for improving every day",
+    "tags": ["book", "self-help", "productivity", "habits"]
+  },
+  {
+    "name": "Python Programming Cookbook",
+    "category": "Books",
+    "qty": 35,
+    "price": 45.99,
+    "description": "Advanced Python recipes and techniques",
+    "tags": ["book", "programming", "python", "cookbook"]
+  },
+  {
+    "name": "Wireless Bluetooth Headphones",
+    "category": "Electronics",
+    "qty": 60,
+    "price": 79.99,
+    "description": "Premium wireless headphones with noise cancellation",
+    "tags": ["headphones", "bluetooth", "wireless", "noise-cancelling"]
+  },
+  {
+    "name": "Gaming Mechanical Keyboard",
+    "category": "Electronics",
+    "qty": 25,
+    "price": 129.99,
+    "description": "RGB mechanical keyboard with Cherry MX switches",
+    "tags": ["keyboard", "gaming", "mechanical", "RGB"]
+  },
+  {
+    "name": "Organic Green Tea",
+    "category": "Food & Beverages",
+    "qty": 200,
+    "price": 8.99,
+    "description": "Premium organic green tea leaves",
+    "tags": ["tea", "organic", "green-tea", "healthy"]
+  },
+  {
+    "name": "Colombian Coffee Beans",
+    "category": "Food & Beverages",
+    "qty": 150,
+    "price": 24.99,
+    "description": "Premium single-origin Colombian coffee beans",
+    "tags": ["coffee", "colombian", "single-origin", "premium"]
+  },
+  {
+    "name": "Yoga Mat Premium",
+    "category": "Sports & Fitness",
+    "qty": 80,
+    "price": 45.00,
+    "description": "Non-slip premium yoga mat with extra cushioning",
+    "tags": ["yoga", "fitness", "mat", "non-slip"]
+  },
+  {
+    "name": "Resistance Bands Set",
+    "category": "Sports & Fitness",
+    "qty": 90,
+    "price": 29.99,
+    "description": "Complete set of resistance bands for home workouts",
+    "tags": ["fitness", "resistance-bands", "home-workout", "strength"]
+  },
+  {
+    "name": "Stainless Steel Water Bottle",
+    "category": "Home & Garden",
+    "qty": 120,
+    "price": 22.99,
+    "description": "Insulated stainless steel water bottle keeps drinks cold for 24 hours",
+    "tags": ["water-bottle", "stainless-steel", "insulated", "eco-friendly"]
+  },
+  {
+    "name": "LED Desk Lamp",
+    "category": "Home & Garden",
+    "qty": 45,
+    "price": 35.99,
+    "description": "Adjustable LED desk lamp with USB charging port",
+    "tags": ["lamp", "LED", "desk", "USB-charging"]
+  },
+  {
+    "name": "Wireless Mouse",
+    "category": "Electronics",
+    "qty": 85,
+    "price": 25.99,
+    "description": "Ergonomic wireless mouse with long battery life",
+    "tags": ["mouse", "wireless", "ergonomic", "computer"]
+  },
+  {
+    "name": "Ceramic Coffee Mug Set",
+    "category": "Home & Garden",
+    "qty": 70,
+    "price": 18.99,
+    "description": "Set of 4 elegant ceramic coffee mugs",
+    "tags": ["mug", "ceramic", "coffee", "set"]
+  },
+  {
+    "name": "Bluetooth Speaker",
+    "category": "Electronics",
+    "qty": 55,
+    "price": 59.99,
+    "description": "Portable Bluetooth speaker with deep bass",
+    "tags": ["speaker", "bluetooth", "portable", "bass"]
+  },
+  {
+    "name": "Canvas Backpack",
+    "category": "Fashion",
+    "qty": 65,
+    "price": 39.99,
+    "description": "Vintage-style canvas backpack with laptop compartment",
+    "tags": ["backpack", "canvas", "vintage", "laptop"]
+  }
+]

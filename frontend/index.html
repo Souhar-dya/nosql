@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>MongoDB Operations Demo - Complete CRUD Interface</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-content">
+        <h1>
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M16 4L4 10v12c0 7.5 5.2 11.5 12 13 6.8-1.5 12-5.5 12-13V10L16 4z" fill="#00ED64" stroke="#00684A" stroke-width="2"/>
+          </svg>
+          MongoDB Complete Operations Demo
+        </h1>
+        <div class="header-actions">
+          <button id="toggleOperations" class="btn btn-secondary">�️ Show All Operations</button>
+          <button id="refreshBtn" class="btn btn-primary">🔄 Refresh Data</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Operations Panel (Hidden by default) -->
+    <div id="operationsPanel" class="operations-panel hidden">
+      <div class="operations-grid">
+        <!-- 1. Create Single Item -->
+        <div class="operation-card">
+          <h3>1️⃣ Create Single Item</h3>
+          <form id="createForm">
+            <div class="form-group">
+              <label>Name *</label>
+              <input name="name" placeholder="Item name" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Category</label>
+                <input name="category" placeholder="Category" />
+              </div>
+              <div class="form-group">
+                <label>Quantity</label>
+                <input name="qty" type="number" placeholder="0" min="0" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Price ($)</label>
+                <input name="price" type="number" step="0.01" placeholder="0.00" min="0" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea name="description" placeholder="Description" rows="2"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Tags (comma separated)</label>
+              <input name="tags" placeholder="tag1, tag2, tag3" />
+            </div>
+            <button type="submit" class="btn btn-primary">Create Item</button>
+          </form>
+          <div class="operation-result" id="createResult"></div>
+        </div>
+
+        <!-- 2. Bulk Insert -->
+        <div class="operation-card">
+          <h3>2️⃣ Bulk Insert Items</h3>
+          <form id="bulkInsertForm">
+            <div class="form-group">
+              <label>JSON Array of Items</label>
+              <textarea name="items" rows="8" placeholder='[
+  {"name": "Item 1", "category": "Category 1", "qty": 10, "price": 5.99},
+  {"name": "Item 2", "category": "Category 2", "qty": 20, "price": 12.99}
+]'></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Bulk Insert</button>
+          </form>
+          <div class="operation-result" id="bulkInsertResult"></div>
+        </div>
+
+        <!-- 3. List/Filter/Search Items -->
+        <div class="operation-card">
+          <h3>3️⃣ List/Filter/Search Items</h3>
+          <form id="listForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Search Text</label>
+                <input name="q" placeholder="Search in name, description, tags" />
+              </div>
+              <div class="form-group">
+                <label>Category</label>
+                <input name="category" placeholder="Filter by category" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Min Quantity</label>
+                <input name="minQty" type="number" placeholder="Min qty" />
+              </div>
+              <div class="form-group">
+                <label>Max Quantity</label>
+                <input name="maxQty" type="number" placeholder="Max qty" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Page</label>
+                <input name="page" type="number" placeholder="1" value="1" />
+              </div>
+              <div class="form-group">
+                <label>Limit</label>
+                <input name="limit" type="number" placeholder="20" value="20" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Sort</label>
+              <select name="sort">
+                <option value="">No sorting</option>
+                <option value="name:asc">Name (A-Z)</option>
+                <option value="name:desc">Name (Z-A)</option>
+                <option value="price:asc">Price (Low-High)</option>
+                <option value="price:desc">Price (High-Low)</option>
+                <option value="qty:asc">Quantity (Low-High)</option>
+                <option value="qty:desc">Quantity (High-Low)</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">List Items</button>
+          </form>
+          <div class="operation-result" id="listResult"></div>
+        </div>
+
+        <!-- 4. Get by ID -->
+        <div class="operation-card">
+          <h3>4️⃣ Get Item by ID</h3>
+          <form id="getByIdForm">
+            <div class="form-group">
+              <label>Item ID</label>
+              <input name="id" placeholder="Enter item ID" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Get Item</button>
+          </form>
+          <div class="operation-result" id="getByIdResult"></div>
+        </div>
+
+        <!-- 5. Text Search -->
+        <div class="operation-card">
+          <h3>5️⃣ Text Search</h3>
+          <form id="textSearchForm">
+            <div class="form-group">
+              <label>Search Query</label>
+              <input name="q" placeholder="Search text in items" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+          </form>
+          <div class="operation-result" id="textSearchResult"></div>
+        </div>
+
+        <!-- 6. Category Count Aggregation -->
+        <div class="operation-card">
+          <h3>6️⃣ Category Count Aggregation</h3>
+          <form id="categoryCountForm">
+            <button type="submit" class="btn btn-primary">Get Category Counts</button>
+          </form>
+          <div class="operation-result" id="categoryCountResult"></div>
+        </div>
+
+        <!-- 7. Replace Item (PUT) -->
+        <div class="operation-card">
+          <h3>7️⃣ Replace Item (PUT)</h3>
+          <form id="replaceForm">
+            <div class="form-group">
+              <label>Item ID *</label>
+              <input name="id" placeholder="Item ID to replace" required />
+            </div>
+            <div class="form-group">
+              <label>New Item Data (JSON)</label>
+              <textarea name="data" rows="6" placeholder='{"name": "New Name", "category": "New Category", "qty": 100, "price": 99.99}'></textarea>
+            </div>
+            <button type="submit" class="btn btn-warning">Replace Item</button>
+          </form>
+          <div class="operation-result" id="replaceResult"></div>
+        </div>
+
+        <!-- 8. Partial Update (PATCH) -->
+        <div class="operation-card">
+          <h3>8️⃣ Partial Update (PATCH)</h3>
+          <form id="patchForm">
+            <div class="form-group">
+              <label>Item ID *</label>
+              <input name="id" placeholder="Item ID to update" required />
+            </div>
+            <div class="form-group">
+              <label>Update Data (JSON)</label>
+              <textarea name="data" rows="4" placeholder='{"qty": 50, "price": 19.99}'></textarea>
+            </div>
+            <button type="submit" class="btn btn-warning">Update Item</button>
+          </form>
+          <div class="operation-result" id="patchResult"></div>
+        </div>
+
+        <!-- 9. Upsert -->
+        <div class="operation-card">
+          <h3>9️⃣ Upsert (Update or Insert)</h3>
+          <form id="upsertForm">
+            <div class="form-group">
+              <label>Item ID</label>
+              <input name="id" placeholder="Item ID (will create if not exists)" required />
+            </div>
+            <div class="form-group">
+              <label>Item Data (JSON)</label>
+              <textarea name="data" rows="6" placeholder='{"name": "Upsert Item", "category": "Test", "qty": 10, "price": 15.99}'></textarea>
+            </div>
+            <button type="submit" class="btn btn-secondary">Upsert Item</button>
+          </form>
+          <div class="operation-result" id="upsertResult"></div>
+        </div>
+
+        <!-- 10. Delete One -->
+        <div class="operation-card">
+          <h3>🔟 Delete Single Item</h3>
+          <form id="deleteForm">
+            <div class="form-group">
+              <label>Item ID *</label>
+              <input name="id" placeholder="Item ID to delete" required />
+            </div>
+            <button type="submit" class="btn btn-danger">Delete Item</button>
+          </form>
+          <div class="operation-result" id="deleteResult"></div>
+        </div>
+
+        <!-- 11. Bulk Delete -->
+        <div class="operation-card">
+          <h3>1️⃣1️⃣ Bulk Delete Items</h3>
+          <form id="bulkDeleteForm">
+            <div class="form-group">
+              <label>Item IDs (JSON Array)</label>
+              <textarea name="ids" rows="4" placeholder='["id1", "id2", "id3"]'></textarea>
+            </div>
+            <button type="submit" class="btn btn-danger">Bulk Delete</button>
+          </form>
+          <div class="operation-result" id="bulkDeleteResult"></div>
+        </div>
+
+        <!-- 12. Count Items -->
+        <div class="operation-card">
+          <h3>1️⃣2️⃣ Count Total Items</h3>
+          <form id="countForm">
+            <button type="submit" class="btn btn-primary">Get Total Count</button>
+          </form>
+          <div class="operation-result" id="countResult"></div>
+        </div>
+
+        <!-- 13. Bulk Update -->
+        <div class="operation-card">
+          <h3>1️⃣3️⃣ Bulk Update Items</h3>
+          <form id="bulkUpdateForm">
+            <div class="form-group">
+              <label>Item IDs (JSON Array)</label>
+              <textarea name="ids" rows="3" placeholder='["id1", "id2", "id3"]'></textarea>
+            </div>
+            <div class="form-group">
+              <label>Quantity Delta</label>
+              <input name="delta" type="number" placeholder="1" value="1" />
+            </div>
+            <button type="submit" class="btn btn-warning">Bulk Update Quantity</button>
+          </form>
+          <div class="operation-result" id="bulkUpdateResult"></div>
+        </div>
+
+        <!-- 14. Import Sample Data -->
+        <div class="operation-card">
+          <h3>1️⃣4️⃣ Import Sample Data</h3>
+          <form id="importSampleForm">
+            <p class="operation-description">
+              This will import predefined sample items (Apple, Banana, Hammer) into the database.
+            </p>
+            <button type="submit" class="btn btn-secondary">Import Sample Data</button>
+          </form>
+          <div class="operation-result" id="importSampleResult"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Dashboard -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon">📦</div>
+        <div class="stat-info">
+          <div class="stat-value" id="totalItems">0</div>
+          <div class="stat-label">Total Items</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📊</div>
+        <div class="stat-info">
+          <div class="stat-value" id="totalCategories">0</div>
+          <div class="stat-label">Categories</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">💰</div>
+        <div class="stat-info">
+          <div class="stat-value" id="totalValue">$0</div>
+          <div class="stat-label">Total Value</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">📈</div>
+        <div class="stat-info">
+          <div class="stat-value" id="avgPrice">$0</div>
+          <div class="stat-label">Avg Price</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content: Items Display -->
+    <div class="main-content">
+      <div class="card">
+        <div class="card-header">
+          <h2>📋 Current Items</h2>
+          <div class="header-actions">
+            <button id="importSample" class="btn btn-secondary">📦 Import Sample</button>
+            <div class="pagination-info" id="paginationInfo"></div>
+          </div>
+        </div>
+        <div id="itemsGrid" class="items-grid">
+          <div class="loading">Loading items...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app-complete.js"></script>
+</body>
+</html>
